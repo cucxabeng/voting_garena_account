@@ -1,0 +1,14 @@
+{% load staticfiles %}
+<link href='{% static "polls/style.css" %}' rel='stylesheet' type='text/css'>
+<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src='{% static "polls/main.js" %}'></script>
+{% if request.session.nickname %}
+    Xin chào {{ request.session.nickname }}. <a href="javascript:;" onclick="logout()">Thoát</a>
+{% endif %}
+<div id="container">
+      <span id="question">{{ question.question_title }}</span>
+    {% for choice in question.choice_set.all %}
+    <div id="choice{{ choice.id }}"><span id="vote{{ choice.id }}">{{ choice.votes }}</span><a href="javascript:;" onclick="voting('{{ choice.id }}')">Vote</a>{{ choice.choice_text }}</div>
+{% endfor %}
+  </div>
+ <iframe id="logoutIframe" src="" style="display:none"></iframe>
